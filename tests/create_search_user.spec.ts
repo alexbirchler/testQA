@@ -2,7 +2,7 @@ import{ test, expect } from '@playwright/test';
 test("Create a new user", async ({ request, baseURL}) => {
 
   // creating a post request with user data
-  const response = await request.post(`https://petstore.swagger.io/v2/user`, {
+  const response = await request.post(`${baseURL}user`, {
     data : {
       "id": 0,
       "username": "Abir",
@@ -14,7 +14,6 @@ test("Create a new user", async ({ request, baseURL}) => {
       "userStatus": 0
     },
   });
-
   // getting the response and fetching user id
   const result = await response.json();
   const userID = result.message;
@@ -22,13 +21,11 @@ test("Create a new user", async ({ request, baseURL}) => {
   // assert that the api is working as expected
   expect(response.ok()).toBeTruthy();
   expect(response.status()).toBe(200); 
-
 });
 
 test("Search user", async ({ request, baseURL}) => {
-
     // request existing user
-    const response = await request.get(`https://petstore.swagger.io/v2/user/Abir`);
+    const response = await request.get(`${baseURL}user/Abir`);
   
     // getting the response and fetching user id
     const result = await response.json();
@@ -37,5 +34,4 @@ test("Search user", async ({ request, baseURL}) => {
     // assert that the api is working as expected
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200); 
-  
-  });
+    });

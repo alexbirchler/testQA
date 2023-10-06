@@ -2,7 +2,7 @@ import{ test, expect } from '@playwright/test';
 test("Find status sold", async ({ request, baseURL}) => {
 
   // creating a post request with user data
-  const response = await request.get(`https://petstore.swagger.io/v2/pet/findByStatus?status=sold`);
+  const response = await request.get(`${baseURL}pet/findByStatus?status=sold`);
 
   // getting and saving the inventory details
   const inventory = await response.json();
@@ -26,11 +26,9 @@ test("Find status sold", async ({ request, baseURL}) => {
   // Let's show all the pets in Json  
   const duplicated = [];
   console.log('*****************************************');
-
   console.log('**********      Json Pets     **************');
   console.log(pets); 
   console.log('*****************************************');
-  
   const seachDuplicatePets = (arr) => {
     const setObj = new Set();
     return pets.reduce((acc, pet) => {
@@ -47,7 +45,6 @@ test("Find status sold", async ({ request, baseURL}) => {
   }
 
   seachDuplicatePets(pets);
-
   console.log('********* Duplicated *************');
   console.log("duplicate pets: " + duplicated.length); 
 
